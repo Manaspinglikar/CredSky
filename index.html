@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f2efe6">
+  <meta name="description" content="SKY CRED turns live weather into a simple, human read. Check the sky's credit score before you step out.">
+  <title>SKY CRED — Check the sky before you step out</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <svg class="svg-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="icon-star" viewBox="0 0 24 24">
+      <path d="M12 1.5c.45 6.38 4.12 10.05 10.5 10.5-6.38.45-10.05 4.12-10.5 10.5C11.55 16.12 7.88 12.45 1.5 12 7.88 11.55 11.55 7.88 12 1.5Z" fill="currentColor"/>
+    </symbol>
+    <symbol id="icon-search" viewBox="0 0 24 24">
+      <circle cx="10.8" cy="10.8" r="6.3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path d="m15.5 15.5 5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="icon-arrow-up-right" viewBox="0 0 24 24">
+      <path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="icon-pin" viewBox="0 0 24 24">
+      <path d="M20 10.4c0 5.1-8 12.1-8 12.1S4 15.5 4 10.4a8 8 0 1 1 16 0Z" fill="none" stroke="currentColor" stroke-width="1.7"/>
+      <circle cx="12" cy="10.2" r="2.6" fill="none" stroke="currentColor" stroke-width="1.7"/>
+    </symbol>
+    <symbol id="icon-humidity" viewBox="0 0 24 24">
+      <path d="M12 2.7S5.2 10.4 5.2 15a6.8 6.8 0 0 0 13.6 0C18.8 10.4 12 2.7 12 2.7Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+      <path d="M9.2 15.2a2.9 2.9 0 0 0 2.8 2.4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="icon-wind" viewBox="0 0 24 24">
+      <path d="M3 8.2h10.1a2.6 2.6 0 1 0-2.6-2.6M3 12h14.4a2.4 2.4 0 1 1-2.4 2.4M3 15.8h6.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="icon-sun" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.7"/>
+      <path d="M12 2v2.2M12 19.8V22M2 12h2.2M19.8 12H22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M19.1 4.9l-1.6 1.6M6.5 17.5l-1.6 1.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="icon-cloud" viewBox="0 0 24 24">
+      <path d="M7.2 18.5a4.2 4.2 0 0 1-.6-8.4 5.8 5.8 0 0 1 11.1 1.5 3.5 3.5 0 0 1-.4 6.9H7.2Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="icon-eye" viewBox="0 0 24 24">
+      <path d="M2.5 12S6.2 5.7 12 5.7 21.5 12 21.5 12 17.8 18.3 12 18.3 2.5 12 2.5 12Z" fill="none" stroke="currentColor" stroke-width="1.7"/>
+      <circle cx="12" cy="12" r="3.1" fill="none" stroke="currentColor" stroke-width="1.7"/>
+    </symbol>
+    <symbol id="icon-gauge" viewBox="0 0 24 24">
+      <path d="M4.1 17.8a9 9 0 1 1 15.8 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+      <path d="m12 13.2 3.7-3.7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      <circle cx="12" cy="13.2" r="1.5" fill="currentColor"/>
+    </symbol>
+    <symbol id="icon-thermometer" viewBox="0 0 24 24">
+      <path d="M10 14.1V5.3a2 2 0 1 1 4 0v8.8a4.2 4.2 0 1 1-4 0Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+      <path d="M12 9v6.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="icon-clock" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="8.8" fill="none" stroke="currentColor" stroke-width="1.7"/>
+      <path d="M12 6.8V12l3.6 2.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="icon-compass" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/>
+      <path d="m15.7 8.3-2 5.4-5.4 2 2-5.4 5.4-2Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="icon-copy" viewBox="0 0 24 24">
+      <rect x="8" y="8" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/>
+      <path d="M16 8V6.8A1.8 1.8 0 0 0 14.2 5H6.8A1.8 1.8 0 0 0 5 6.8v7.4A1.8 1.8 0 0 0 6.8 16H8" fill="none" stroke="currentColor" stroke-width="1.7"/>
+    </symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24">
+      <path d="m4.5 12.5 5 5 10-11" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="icon-alert" viewBox="0 0 24 24">
+      <path d="M12 3.2 21.2 20H2.8L12 3.2Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+      <path d="M12 9v4.7M12 17.1v.1" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="icon-code" viewBox="0 0 24 24">
+      <path d="m8.2 7.5-5 4.5 5 4.5M15.8 7.5l5 4.5-5 4.5M13.5 4.8l-3 14.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="icon-refresh" viewBox="0 0 24 24">
+      <path d="M20 7.5V3.8m0 0h-3.7M20 3.8l-3.2 3.1a7.7 7.7 0 1 0 1.4 8.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+  </svg>
+
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="SKYCRED home">
+        <span class="brand-mark"><svg aria-hidden="true"><use href="#icon-star"></use></svg></span>
+        <span class="brand-word">SKY<span>CRED</span></span>
+      </a>
+      <div class="header-meta">
+        <span class="api-pill"><span class="api-dot" aria-hidden="true"></span>Live API</span>
+        <span class="header-rule" aria-hidden="true"></span>
+        <span class="header-location" id="headerLocation">Mumbai, IN</span>
+        <time class="header-time" id="headerTime">--:--</time>
+      </div>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <section class="hero" aria-labelledby="pageTitle">
+        <div class="hero-copy">
+          <p class="eyebrow">
+            <span>Weather credit report</span>
+            <span class="eyebrow-rule" aria-hidden="true"></span>
+            <span>Live conditions</span>
+          </p>
+          <h1 id="pageTitle">Check the sky’s<br><span class="hero-accent">credit score</span><span class="hero-period">.</span></h1>
+        </div>
+        <div class="hero-side">
+          <p class="tagline">Check the sky's credit score before you step out.</p>
+          <p class="hero-note">Live conditions, a clear verdict, and the numbers that matter. No weather jargon — just a better answer to “should I go outside?”</p>
+        </div>
+      </section>
+
+      <section class="search-section" aria-label="Search for a city">
+        <form class="search-form" id="searchForm" novalidate>
+          <label class="sr-only" for="cityInput">City name</label>
+          <span class="search-icon" aria-hidden="true"><svg><use href="#icon-search"></use></svg></span>
+          <input
+            id="cityInput"
+            name="city"
+            type="search"
+            value="Mumbai"
+            placeholder="Search any city…"
+            autocomplete="off"
+            autocapitalize="words"
+            spellcheck="false"
+            maxlength="80"
+            aria-describedby="searchHint searchError"
+          >
+          <button class="search-button" id="searchButton" type="submit">
+            <span class="button-spinner" aria-hidden="true"></span>
+            <span class="button-label">Check the sky</span>
+            <svg class="button-arrow" aria-hidden="true"><use href="#icon-arrow-up-right"></use></svg>
+          </button>
+        </form>
+        <p class="sr-only" id="searchHint">Press Enter or choose Check the sky. An empty search will not send a request.</p>
+        <p class="field-error" id="searchError" role="alert" hidden></p>
+
+        <div class="popular-cities">
+          <span class="popular-label">Popular cities</span>
+          <div class="chips" id="popularCities" role="group" aria-label="Choose a popular city"></div>
+        </div>
+      </section>
+
+      <div class="loading-track" id="loadingTrack" hidden aria-hidden="true"><span></span></div>
+
+      <div class="error-banner" id="errorBanner" role="alert" hidden>
+        <span class="error-banner-icon" aria-hidden="true"><svg><use href="#icon-alert"></use></svg></span>
+        <div class="error-banner-copy">
+          <strong id="errorTitle">Something went wrong</strong>
+          <p id="errorMessage">Please try again.</p>
+          <span class="error-context" id="errorContext"></span>
+        </div>
+        <button class="retry-button" id="retryButton" type="button">
+          <svg aria-hidden="true"><use href="#icon-refresh"></use></svg>
+          Retry
+        </button>
+      </div>
+
+      <p class="sr-only" id="globalStatus" role="status" aria-live="polite"></p>
+
+      <section class="dashboard" id="dashboard" aria-label="Current weather report">
+        <div class="dashboard-top">
+          <article class="weather-card is-loading" id="weatherCard" data-theme="night" aria-labelledby="cityName">
+            <div class="weather-card-top">
+              <div class="weather-location">
+                <p class="card-kicker">Current conditions</p>
+                <h2 id="cityName">
+                  <span id="cityLabel">Mumbai</span>
+                  <span class="country-code" id="countryCode">India</span>
+                </h2>
+                <p class="region" id="regionName">Maharashtra</p>
+              </div>
+              <span class="weather-status" id="weatherStatus"><span class="status-dot" aria-hidden="true"></span><span id="weatherStatusText">Connecting</span></span>
+            </div>
+
+            <div class="weather-main">
+              <div class="temperature-block">
+                <div class="temperature-line">
+                  <span class="temperature" id="tempValue">--</span>
+                  <span class="temperature-unit">°C</span>
+                </div>
+                <p class="feels-like">Feels like <span id="feelsLike">--</span></p>
+              </div>
+              <div class="condition-block">
+                <div class="weather-icon-wrap" id="weatherIconWrap">
+                  <img id="conditionIcon" width="128" height="128" alt="" hidden>
+                  <svg class="weather-icon-fallback" aria-hidden="true"><use href="#icon-star"></use></svg>
+                </div>
+                <p class="condition-text" id="conditionText">Fetching the sky…</p>
+              </div>
+            </div>
+
+            <div class="weather-meta-row">
+              <div class="weather-meta-item">
+                <span class="meta-label">Local time</span>
+                <span class="meta-value"><time id="localTime">--:--</time><span class="meta-sub" id="localDate">—</span></span>
+              </div>
+              <div class="weather-meta-item">
+                <span class="meta-label">Last updated</span>
+                <span class="meta-value"><time id="lastUpdated">--:--</time><span class="meta-sub" id="updatedAgo">—</span></span>
+              </div>
+              <div class="weather-meta-item">
+                <span class="meta-label">Time zone</span>
+                <span class="meta-value"><span id="timeZone">—</span><span class="meta-sub" id="timeZoneName">—</span></span>
+              </div>
+            </div>
+
+          </article>
+
+          <aside class="verdict-card is-loading" id="verdictCard" data-tone="go" aria-labelledby="personalityTitle">
+            <div class="verdict-top">
+              <span class="verdict-label">Sky report</span>
+              <span class="verdict-number" id="reportNumber">No. —</span>
+            </div>
+            <span class="verdict-glyph" aria-hidden="true"><svg><use href="#icon-star"></use></svg></span>
+            <div class="verdict-body">
+              <p class="verdict-kicker">Weather personality</p>
+              <h2 id="personalityTitle">Reading the sky…</h2>
+              <p class="verdict-copy" id="personalityCopy">Checking the temperature, conditions and wind for a straight answer.</p>
+            </div>
+            <div class="verdict-stamp-wrap">
+              <span class="verdict-stamp" id="verdictStamp">Pending</span>
+            </div>
+            <div class="verdict-bottom">
+              <p id="personalityBasis">Based on live temperature, condition &amp; wind.</p>
+              <p class="verdict-disclaimer">An original weather read — not a real credit score.</p>
+            </div>
+          </aside>
+        </div>
+
+        <div class="metric-grid" aria-label="Primary weather metrics">
+          <article class="metric-card metric-humidity" aria-labelledby="humidityLabel">
+            <div class="metric-top">
+              <span class="metric-icon" aria-hidden="true"><svg><use href="#icon-humidity"></use></svg></span>
+              <h3 id="humidityLabel">Humidity</h3>
+              <span class="metric-note" id="humidityNote">—</span>
+            </div>
+            <div class="metric-value-line">
+              <strong id="humidityValue">--</strong><span class="metric-unit">%</span>
+            </div>
+            <div class="metric-bar" aria-hidden="true"><span id="humidityBar"></span></div>
+            <p class="metric-caption" id="humidityCaption">Reading the air…</p>
+          </article>
+
+          <article class="metric-card metric-wind" aria-labelledby="windLabel">
+            <div class="metric-top">
+              <span class="metric-icon" aria-hidden="true"><svg><use href="#icon-wind"></use></svg></span>
+              <h3 id="windLabel">Wind</h3>
+              <span class="metric-note" id="windNote">—</span>
+            </div>
+            <div class="metric-value-line">
+              <strong id="windValue">--</strong><span class="metric-unit">km/h</span>
+            </div>
+            <div class="metric-bar" aria-hidden="true"><span id="windBar"></span></div>
+            <p class="metric-caption" id="windCaption">Checking the breeze…</p>
+          </article>
+
+          <article class="metric-card metric-uv" aria-labelledby="uvLabel">
+            <div class="metric-top">
+              <span class="metric-icon" aria-hidden="true"><svg><use href="#icon-sun"></use></svg></span>
+              <h3 id="uvLabel">UV index</h3>
+              <span class="metric-note" id="uvNote">—</span>
+            </div>
+            <div class="metric-value-line">
+              <strong id="uvValue">--</strong><span class="metric-unit">index</span>
+            </div>
+            <div class="metric-bar" aria-hidden="true"><span id="uvBar"></span></div>
+            <p class="metric-caption" id="uvCaption">Measuring the sun…</p>
+          </article>
+        </div>
+
+        <section class="details-panel" aria-labelledby="detailsTitle">
+          <div class="details-heading">
+            <div>
+              <p class="section-kicker">The fine print</p>
+              <h2 id="detailsTitle">Conditions, in detail</h2>
+            </div>
+            <p class="details-note">A few more signals from the current WeatherAPI report.</p>
+          </div>
+          <dl class="details-grid">
+            <div class="detail-item">
+              <dt><span class="detail-icon" aria-hidden="true"><svg><use href="#icon-cloud"></use></svg></span>Cloud coverage</dt>
+              <dd id="cloudValue">—</dd>
+            </div>
+            <div class="detail-item">
+              <dt><span class="detail-icon" aria-hidden="true"><svg><use href="#icon-eye"></use></svg></span>Visibility</dt>
+              <dd id="visibilityValue">—</dd>
+            </div>
+            <div class="detail-item">
+              <dt><span class="detail-icon" aria-hidden="true"><svg><use href="#icon-gauge"></use></svg></span>Pressure</dt>
+              <dd id="pressureValue">—</dd>
+            </div>
+            <div class="detail-item">
+              <dt><span class="detail-icon" aria-hidden="true"><svg><use href="#icon-wind"></use></svg></span>Wind speed</dt>
+              <dd id="windDetailValue">—</dd>
+            </div>
+            <div class="detail-item">
+              <dt><span class="detail-icon" aria-hidden="true"><svg><use href="#icon-thermometer"></use></svg></span>Temperature</dt>
+              <dd id="fahrenheitValue">—</dd>
+            </div>
+            <div class="detail-item">
+              <dt><span class="detail-icon" aria-hidden="true"><svg><use href="#icon-clock"></use></svg></span>Last updated</dt>
+              <dd id="lastUpdatedDetail">—</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="api-panel" aria-labelledby="apiTitle">
+          <header class="api-header">
+            <div class="api-heading">
+              <span class="api-icon" aria-hidden="true"><svg><use href="#icon-code"></use></svg></span>
+              <div>
+                <p class="section-kicker">Developer view</p>
+                <h2 id="apiTitle">API response</h2>
+              </div>
+              <span class="endpoint-badge">current.json</span>
+            </div>
+            <div class="api-actions">
+              <div class="api-tabs" role="tablist" aria-label="JSON representation">
+                <button id="formattedTab" class="api-tab" type="button" role="tab" aria-selected="true" aria-controls="jsonPanel" tabindex="0">Formatted</button>
+                <button id="rawTab" class="api-tab" type="button" role="tab" aria-selected="false" aria-controls="jsonPanel" tabindex="-1">Raw</button>
+              </div>
+              <button class="copy-button" id="copyButton" type="button" aria-label="Copy JSON to clipboard" disabled>
+                <svg aria-hidden="true"><use href="#icon-copy"></use></svg>
+                <span id="copyLabel">Copy JSON</span>
+              </button>
+            </div>
+          </header>
+          <div class="api-toolbar">
+            <span class="payload-status"><span class="payload-dot" aria-hidden="true"></span><span id="payloadStatus">Awaiting live payload</span></span>
+            <span class="payload-size" id="jsonSize">—</span>
+          </div>
+          <div class="json-view" id="jsonPanel" role="tabpanel" aria-labelledby="formattedTab" tabindex="0">
+            <pre class="json-code json-placeholder" id="jsonContent">// No successful API response yet.
+// Live weather JSON will appear here after Mumbai loads.</pre>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <span class="brand-mark brand-mark-small"><svg aria-hidden="true"><use href="#icon-star"></use></svg></span>
+        <span>SKY CRED</span>
+      </div>
+      <p>Weather data by <a href="https://www.weatherapi.com/" target="_blank" rel="noreferrer">WeatherAPI</a>. Built for better outside decisions.</p>
+      <p class="footer-disclaimer">Weather personality is an application-generated interpretation, not a real credit score.</p>
+    </footer>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <noscript>
+    <div class="noscript">SKY CRED needs JavaScript enabled to fetch live weather.</div>
+  </noscript>
+</body>
+</html>
