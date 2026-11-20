@@ -2,7 +2,7 @@
 
 SKY CRED turns live WeatherAPI data into a plain-language "weather credit report": current conditions, a dynamic personality verdict, key metrics, and the raw payload for anyone who wants to check the numbers.
 
-**Live app:** _deployment pending_
+**Live app:** [https://sky-cred-rho.vercel.app](https://sky-cred-rho.vercel.app)
 
 ## What it does
 
@@ -105,14 +105,17 @@ The frontend calls only the same-origin `/api/weather?q=...` endpoint. The Weath
 
 ### Testing summary
 
-- **121 automated Playwright checks passed** (98 functional/responsive/accessibility, 23 async/state/priority).
-- **Lighthouse (local production-like build):** Accessibility 100, Best Practices 100, SEO 100, no failing audits.
-- **Visual checks:** full-page screenshots at 1440px, 768px, and 390px, plus a focused weather-card review.
+- **121 automated Playwright checks passed locally** (98 functional/responsive/accessibility, 23 async/state/priority).
+- **35 automated production checks passed** against the live Vercel URL, including default load, Enter search, chip search, country disambiguation, raw/formatted JSON copy, invalid-city handling, responsive widths down to 320px, and API-key leakage checks.
+- **Lighthouse (local):** Accessibility 100, Best Practices 100, SEO 100, no failing audits.
+- **Lighthouse (live Vercel URL):** Accessibility 100, Best Practices 100, SEO 100, no failing audits.
+- **Visual checks:** full-page screenshots at 1440px, 768px, and 390px, plus a focused weather-card review and a fresh-load mobile pass.
 - **API checks:** live WeatherAPI responses verified for Mumbai, Delhi (country-qualified to India), Bengaluru, and London.
+- **Security checks:** CSP, HSTS, frame denial, nosniff, referrer policy, and permissions policy confirmed on the live response; the WeatherAPI key was absent from the DOM and all browser requests.
 
 ### Honest gaps and caveats
 
-- **Live Vercel deployment:** _pending; this section will be updated with the URL and live verification results._
+- **Git-connected auto-deploy:** the Vercel account has no GitHub login connection, so the project was created and deployed through the Vercel API with a direct file upload. The GitHub repository is the source of truth, but a new push does not automatically trigger a Vercel build. Run `vercel --prod` from the project root (after `vercel link`) or repeat the API deployment to publish future changes. Linking the repo in the Vercel dashboard would enable automatic deploys.
 - **Screenshot reference:** no design screenshot was attached to the brief, so the visual direction was interpreted from the written description. It may not match an unseen reference pixel-for-pixel.
 - **Browser coverage:** automated checks ran in Chromium/Chrome only. Firefox and Safari were not tested.
 - **Screen readers:** semantics and Lighthouse checks pass, but no manual NVDA/JAWS/VoiceOver session was performed.
