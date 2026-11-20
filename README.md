@@ -91,7 +91,7 @@ The frontend calls only the same-origin `/api/weather?q=...` endpoint. The Weath
 |---|---|---|---|
 | FR-01 | Load Mumbai by default, with loading feedback | `js/cities.js` default city; `js/app.js` initial load; skeleton/loading state in `js/ui.js` | Passed: default input, Mumbai data, loading indicator, populated card |
 | FR-02 | Search by city name, button and Enter, validation | Search form in `index.html`; submit handling in `js/app.js`; empty-input validation | Passed: Enter, button, London/New York, empty input (no request), retained input |
-| FR-03 | Ten popular-city shortcuts update all data without refresh | `POPULAR_CITIES` in `js/cities.js`; chip rendering and active state in `js/ui.js` | Passed: all 10 rendered, chip fetch, input sync, single active chip, error reverts active chip |
+| FR-03 | Ten popular-city shortcuts update all data without refresh | `POPULAR_CITIES` in `js/cities.js`; chip rendering and active state in `js/ui.js` | Passed: all 10 rendered and fetched live, input sync, single active chip, country aliases (New York returns “United States of America”), error reverts active chip |
 | FR-04 | Live current weather from WeatherAPI `/v1/current.json` | `js/weather-api.js` → `/api/weather` → WeatherAPI; rendering in `js/ui.js` | Passed: city/country, temp °C, condition, icon, feels-like, humidity, wind km/h, UV, local timezone, local clock, last updated |
 | FR-05 | Dynamic weather personality | `js/personality.js` rule priority and copy | Passed: all thresholds and priority combinations, plus live Mumbai/Delhi/London/Bengaluru updates |
 | FR-06 | Humidity, wind, UV cards plus secondary metrics | Metric cards and detail grid in `index.html`/`styles.css`; values from API | Passed: every displayed value matched the API payload, including cloud, visibility, pressure, °F, wind detail |
@@ -107,10 +107,11 @@ The frontend calls only the same-origin `/api/weather?q=...` endpoint. The Weath
 
 - **121 automated Playwright checks passed locally** (98 functional/responsive/accessibility, 23 async/state/priority).
 - **35 automated production checks passed** against the live Vercel URL, including default load, Enter search, chip search, country disambiguation, raw/formatted JSON copy, invalid-city handling, responsive widths down to 320px, and API-key leakage checks.
+- **All ten popular-city chips passed a live sweep**, each loading fresh data, syncing the input, and keeping exactly one chip active.
 - **Lighthouse (local):** Accessibility 100, Best Practices 100, SEO 100, no failing audits.
 - **Lighthouse (live Vercel URL):** Accessibility 100, Best Practices 100, SEO 100, no failing audits.
 - **Visual checks:** full-page screenshots at 1440px, 768px, and 390px, plus a focused weather-card review and a fresh-load mobile pass.
-- **API checks:** live WeatherAPI responses verified for Mumbai, Delhi (country-qualified to India), Bengaluru, and London.
+- **API checks:** live WeatherAPI responses verified for all ten popular cities; Delhi is country-qualified to India, and New York’s API label “United States of America” is handled by the country-alias matcher.
 - **Security checks:** CSP, HSTS, frame denial, nosniff, referrer policy, and permissions policy confirmed on the live response; the WeatherAPI key was absent from the DOM and all browser requests.
 
 ### Honest gaps and caveats
